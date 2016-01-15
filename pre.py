@@ -1,9 +1,13 @@
 """
 Test program for pre-processing schedule
+
+The entry 'date' and 'currentWeek' feilds has been added 
 """
 import arrow
 
 base = arrow.now()
+today = arrow.now()
+
 
 def process(raw):
     """
@@ -31,7 +35,7 @@ def process(raw):
 
         if field == "begin":
             try:
-                base = arrow.get(content)
+                base = arrow.get(content,'MM/DD/YYYY')   #Get the date tha American way
             except:
                 raise ValueError("Unable to parse date {}".format(content))
 
@@ -42,10 +46,16 @@ def process(raw):
             entry['topic'] = ""
             entry['project'] = ""
             entry['week'] = content
+            entry['date'] = base.format('MM/DD/YYYY')   # format the date so it will be acceptable by json
+            nextWeek = base.replace(weeks=+1)           # add a week to the base date
+            entry['currentWeek'] = today >= base and today < nextWeek   # if current week true else false
+            base = nextWeek                             # Reset the base date to be next week's date
+
+            
 
         elif field == 'topic' or field == 'project':
             entry[field] = content
-
+            
         else:
             raise ValueError("Syntax error in line: {}".format(line))
 
