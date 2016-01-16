@@ -9,5 +9,5 @@ List of edited files:
 
 ## On ix.cs.uoregon.edu ##
 
-You can find the files on `public_html/cis399se/htbin/proj2-flask`
+You can find the files on `ix.cs.uoregon.edu/~oka/public_html/cis399se/htbin/proj2-flask`
 [Here on ix 7005 port](http:ix.cs.uoregon.edu:7005)
